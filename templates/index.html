@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LaptopAI</title>
+
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="logo">CyberLap</div>
+
+      <ul class="nav-links">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Recommendation</a></li>
+      </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-left">
+        <h1>Smart Laptop Recommendation System</h1>
+
+        <p>
+          Temukan laptop terbaik sesuai budget dan kebutuhanmu menggunakan
+          Artificial Intelligence dan algoritma KNN.
+        </p>
+
+        <button class="hero-btn">Explore Now</button>
+      </div>
+    </section>
+
+    <!-- Recommendation Form -->
+    <section class="form-section">
+      <div class="form-container">
+        <h2>Find Your Ideal Laptop</h2>
+
+        <form>
+          <div class="form-group">
+            <label>Budget</label>
+            <input type="number" placeholder="Contoh: 10000000" />
+          </div>
+
+          <div class="form-group">
+            <label>Kebutuhan</label>
+
+            <select>
+              <option>Pilih Kebutuhan</option>
+              <option>Coding</option>
+              <option>Editing</option>
+              <option>Rendering</option>
+              <option>Office</option>
+            </select>
+          </div>
+
+          <button type="submit" class="recommend-btn">
+            Get Recommendation
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- About AI -->
+    <section class="about">
+      <h2>About LaptopAI</h2>
+
+      <p>
+        LaptopAI merupakan sistem rekomendasi laptop berbasis Artificial
+        Intelligence yang menggunakan algoritma K-Nearest Neighbor (KNN) untuk
+        membantu pengguna menemukan laptop terbaik berdasarkan budget dan
+        kebutuhan penggunaan.
+      </p>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <p>© 2026 LaptopAI | Artificial Intelligence Project</p>
+    </footer>
+  </body>
+</html>
