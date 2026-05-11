@@ -1,0 +1,23 @@
+# Virtual environment
+venv/
+env/
+ENV/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Model dan dataset (opsional, karena dataset besar)
+dataset/*.csv
+model/*.pkl
+
+# File sementara
+*.tmp
+*.temp
+
+# IDE
+.vscode/
+.idea/
+
+# Log
+*.log
