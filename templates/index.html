@@ -21,9 +21,12 @@
       <div class="logo">CyberLap</div>
 
       <ul class="nav-links">
-        <li><a href="#">Home</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Recommendation</a></li>
+        <li><a href="/">Home</a></li>
+
+        <!-- PINDAH KE HALAMAN ABOUT -->
+        <li><a href="/about">About</a></li>
+
+        <li><a href="#recommendation">Recommendation</a></li>
       </ul>
     </nav>
 
@@ -37,12 +40,15 @@
           Artificial Intelligence dan algoritma KNN.
         </p>
 
-        <button class="hero-btn">Explore Now</button>
+        <!-- BUTTON MENUJU FORM -->
+        <a href="#recommendation">
+          <button class="hero-btn">Explore Now</button>
+        </a>
       </div>
     </section>
 
     <!-- Recommendation Form -->
-    <section class="form-section">
+    <section class="form-section" id="recommendation">
       <div class="form-container">
         <h2>Find Your Ideal Laptop</h2>
 
@@ -61,6 +67,7 @@
               <option>Editing</option>
               <option>Rendering</option>
               <option>Office</option>
+              <option>Gaming</option>
             </select>
           </div>
 
