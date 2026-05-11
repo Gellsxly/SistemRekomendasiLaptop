@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Recommendation Result | CyberLap</title>
+
+    <!-- CSS -->
+
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+
+    <!-- FONT -->
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <!-- =======================
+         NAVBAR
+    ======================== -->
+
+    <nav class="navbar">
+      <div class="logo">CyberLap</div>
+
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+
+        <li><a href="/about">About</a></li>
+      </ul>
+    </nav>
+
+    <!-- =======================
+         RESULT SECTION
+    ======================== -->
+
+    <section class="result-section">
+      <h1>Recommendation Result</h1>
+
+      <p class="result-info">
+        Budget:
+        <span>Rp {{ budget }}</span>
+
+        <br />
+
+        Kebutuhan:
+        <span>{{ kebutuhan }}</span>
+      </p>
+
+      <!-- ERROR -->
+
+      {% if error %}
+
+      <div class="error-box">{{ error }}</div>
+
+      {% endif %}
+
+      <!-- MESSAGE -->
+
+      {% if message %}
+
+      <div class="message-box">{{ message }}</div>
+
+      {% endif %}
+
+      <!-- RESULT CARD -->
+
+      <div class="result-container">
+        {% for laptop in recommendations %}
+
+        <div class="result-card">
+          <!-- NAMA LAPTOP -->
+
+          <h2>{{ laptop.product_name }}</h2>
+
+          <!-- SPESIFIKASI -->
+
+          <div class="spec-list">
+            <p>
+              <strong>Processor:</strong>
+              {{ laptop.processor }}
+            </p>
+
+            <p>
+              <strong>RAM:</strong>
+              {{ laptop.ram }} GB
+            </p>
+
+            <p>
+              <strong>GPU:</strong>
+              {{ laptop.gpu }}
+            </p>
+
+            <p>
+              <strong>Harga:</strong>
+              {{ laptop.price }}
+            </p>
+
+            <p>
+              <strong>Kategori:</strong>
+              {{ laptop.kategori_kebutuhan }}
+            </p>
+
+            {% if laptop.shop_name %}
+
+            <p>
+              <strong>Toko:</strong>
+              {{ laptop.shop_name }}
+            </p>
+
+            {% endif %}
+          </div>
+
+          <!-- BUTTON PRODUK -->
+
+          {% if laptop.product_url %}
+
+          <a
+            href="{{ laptop.product_url }}"
+            target="_blank"
+            class="product-btn"
+          >
+            Lihat Produk
+          </a>
+
+          {% endif %}
+        </div>
+
+        {% endfor %}
+      </div>
+    </section>
+
+        <!-- Footer -->
+
+    <footer>
+      <p>© 2026 CyberLap | Artificial Intelligence Project</p>
+    </footer>
+    
+  </body>
+</html>
