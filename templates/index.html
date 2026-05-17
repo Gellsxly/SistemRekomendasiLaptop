@@ -1,132 +1,113 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>CyberLap - Smart Laptop Recommendation</title>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- CSS -->
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/style.css') }}"
-    />
+  <title>CyberLap - Smart Laptop Recommendation</title>
 
-    <!-- Google Fonts -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-  </head>
+  <!-- CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
 
-  <body>
-    <!-- =======================
-       NAVBAR
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
+</head>
+
+<body>
+  <!-- =======================
+            NAVBAR
   ======================== -->
+  <nav class="navbar">
+    <div class="logo">CyberLap</div>
 
-    <nav class="navbar">
-      <div class="logo">CyberLap</div>
+    <ul class="nav-links">
+      <li><a href="/">Beranda</a></li>
+      <li><a href="/about">Tentang</a></li>
+      <li><a href="#recommendation">Rekomendasi</a></li>
+    </ul>
+  </nav>
 
-      <ul class="nav-links">
-        <li><a href="/">Home</a></li>
-        <li><a href="/about">About</a></li>
-        <li><a href="#recommendation">Recommendation</a></li>
-      </ul>
-    </nav>
-
-    <!-- =======================
-       HERO SECTION
+  <!-- =======================
+            HERO SECTION
   ======================== -->
-
-    <section class="hero">
-      <div class="hero-left">
-        <h1>Smart Laptop Recommendation System</h1>
-
-        <p>
-          Temukan laptop terbaik sesuai budget dan kebutuhanmu menggunakan
-          Artificial Intelligence dan algoritma KNN.
-        </p>
-
-        <a href="#recommendation">
-          <button class="hero-btn">Explore Now</button>
-        </a>
-      </div>
-    </section>
-
-    <!-- =======================
-       FORM SECTION
-  ======================== -->
-
-    <section class="form-section" id="recommendation">
-      <div class="form-container">
-        <h2>Find Your Ideal Laptop</h2>
-
-        <!-- FORM MENUJU RESULT PAGE -->
-
-        <form action="/recommend" method="POST">
-          <!-- Budget -->
-
-          <div class="form-group">
-            <label>Budget (Rp)</label>
-
-            <input
-              type="number"
-              name="budget"
-              placeholder="Contoh: 15000000"
-              required
-            />
-          </div>
-
-          <!-- Kebutuhan -->
-
-          <div class="form-group">
-            <label>Kebutuhan</label>
-
-            <select name="kebutuhan" required>
-              <option value="">Pilih Kebutuhan</option>
-
-              <option value="Coding">Coding</option>
-
-              <option value="Editing">Editing</option>
-
-              <option value="Rendering">Rendering</option>
-
-              <option value="Office">Office</option>
-
-              <option value="Gaming">Gaming</option>
-            </select>
-          </div>
-
-          <!-- Submit Button -->
-
-          <button type="submit" class="recommend-btn">
-            Get Recommendation
-          </button>
-        </form>
-      </div>
-    </section>
-
-    <!-- =======================
-       ABOUT SECTION
-  ======================== -->
-
-    <section class="about">
-      <h2>About LaptopAI</h2>
+  <section class="hero">
+    <div class="hero-left">
+      <h1>Sistem Rekomendasi Laptop Cerdas</h1>
 
       <p>
-        LaptopAI merupakan sistem rekomendasi laptop berbasis Artificial
-        Intelligence yang menggunakan algoritma K-Nearest Neighbor (KNN) untuk
-        membantu pengguna menemukan laptop terbaik berdasarkan budget dan
-        kebutuhan penggunaan.
+        Temukan laptop terbaik sesuai budget dan kebutuhanmu menggunakan
+        Artificial Intelligence dan algoritma Machine Learning tercerdas hasil optimasi.
       </p>
-    </section>
 
-    <!-- =======================
-       FOOTER
+      <a href="#recommendation">
+        <button class="hero-btn">Temukan Sekarang</button>
+      </a>
+    </div>
+  </section>
+
+  <!-- =======================
+            FORM SECTION
   ======================== -->
+  <section class="form-section" id="recommendation">
+    <div class="form-container">
+      <h2>Temukan Laptop Impianmu</h2>
 
-    <footer>
-      <p>© 2026 CyberLap | Artificial Intelligence Project</p>
-    </footer>
-  </body>
+      <form action="/recommend" method="POST">
+        
+        <!-- Budget -->
+        <div class="form-group">
+          <label for="budget">Budget (Rp)</label>
+          <input type="number" id="budget" name="budget" placeholder="Contoh: 15000000" required />
+        </div>
+
+        <!-- Kebutuhan (5 Kategori) -->
+        <div class="form-group">
+          <label for="kebutuhan">Kebutuhan Utama</label>
+          <select id="kebutuhan" name="kebutuhan" required>
+            <option value="">Pilih Kebutuhan</option>
+            <option value="Office">Administrasi Kantor</option>
+            <option value="Coding">Pemrograman & Development (Coding)</option>
+            <option value="Editing">Desain Grafis & Editing Video</option>
+            <option value="Rendering">Rendering 3D & Video Production</option>
+            <option value="Gaming">Bermain Game Berat (Gaming)</option>
+          </select>
+        </div>
+
+        <!-- RAM (Optional) -->
+        <div class="form-group">
+          <label for="ram">RAM Preferensi (GB) <span style="color: #999; font-size: 12px;"></span></label>
+          <input type="number" id="ram" name="ram" placeholder="Contoh: 16" min="4" step="2" />
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="recommend-btn">
+          Dapatkan Rekomendasi
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- =======================
+            ABOUT SECTION
+  ======================== -->
+  <section class="about">
+    <h2>Tentang CyberLap</h2>
+
+    <p>
+      CyberLap merupakan sistem rekomendasi laptop berbasis Artificial Intelligence yang mengombinasikan 
+      3 algoritma Machine Learning terkuat (KNN, Random Forest, dan Weighted KNN) untuk memberikan rekomendasi 
+      paling akurat berdasarkan data pasar riil dan spesifikasi hardware yang dioptimalkan.
+    </p>
+  </section>
+
+  <!-- =======================
+            FOOTER
+  ======================== -->
+  <footer>
+    <p>© 2026 CyberLap | Artificial Intelligence Project</p>
+  </footer>
+</body>
+
 </html>

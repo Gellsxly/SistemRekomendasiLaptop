@@ -1,118 +1,137 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Recommendation Result | CyberLap</title>
 
-    <!-- CSS -->
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/style.css') }}"
-    />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recommendation Result | CyberLap</title>
 
-    <!-- FONT -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-  </head>
+  <!-- CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
 
-  <body>
-    <!-- =======================
-         NAVBAR
+  <!-- FONT -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
+</head>
+
+<body>
+  <!-- =======================
+          NAVBAR
     ======================== -->
-    <nav class="navbar">
-      <div class="logo">CyberLap</div>
-      <ul class="nav-links">
-        <li><a href="/">Home</a></li>
-        <li><a href="/about">About</a></li>
-      </ul>
-    </nav>
+  <nav class="navbar">
+    <div class="logo">CyberLap</div>
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/about">About</a></li>
+    </ul>
+  </nav>
 
-    <!-- =======================
-         RESULT SECTION
+  <!-- =======================
+          RESULT SECTION
     ======================== -->
-    <section class="result-section">
-      <h1>Recommendation Result</h1>
+  <section class="result-section">
+    <h1>Recommendation Result</h1>
 
+    <div class="result-info-container">
       <p class="result-info">
-        Budget:
-        <span>Rp {{ budget }}</span>
+        Budget Maksimal:
+        <span>Rp {{ "{:,}".format(budget).replace(',', '.') }}</span>
         <br />
-        Kebutuhan:
+        Kebutuhan Pengguna:
         <span>{{ kebutuhan }}</span>
       </p>
+    </div>
 
-      <!-- MODEL ACCURACY INFO -->
-      {% if model_accuracy %}
-      <div class="model-info">
-        <div class="info-icon">🤖</div>
-        <div class="info-text">
-          <strong>Akurasi Model KNN</strong><br />
-          Model ini memiliki akurasi sebesar 
-          <span class="accuracy-value">{{ "%.2f"|format(model_accuracy*100) }}%</span><br />
-          <small>(berdasarkan pengujian dengan data laptop yang ada)</small>
-        </div>
+    <!-- Di bagian MODEL ACCURACY INFO -->
+    {% if model_accuracy %}
+    <div class="model-info">
+      <div class="info-icon">🤖</div>
+      <div class="info-text">
+        <strong>Akurasi Intelligence Model</strong><br />
+        Model sistem rekomendasi ini memiliki tingkat akurasi sebesar
+        <span class="accuracy-value">{{ "{:.2%}".format(model_accuracy) }}</span><br />
+        {% if model_type %}
+        <small>Menggunakan algoritma: <strong>{{ model_type }}</strong></small>
+        {% else %}
+        <small>(dioptimalkan menggunakan 3 algoritma: KNN, Random Forest, Weighted KNN)</small>
+        {% endif %}
       </div>
-      {% endif %}
+    </div>
+    {% endif %}
 
-      <!-- ERROR -->
-      {% if error %}
-      <div class="error-box">{{ error }}</div>
-      {% endif %}
+    <!-- ERROR HANDLING -->
+    {% if error %}
+    <div class="error-box"
+      style="background-color: #ffebee; color: #c62828; padding: 15px; border-radius: 8px; margin-bottom: 20px; font-weight: 500;">
+      ⚠️ {{ error }}
+    </div>
+    {% endif %}
 
-      <!-- MESSAGE -->
-      {% if message %}
-      <div class="message-box">{{ message }}</div>
-      {% endif %}
+    <!-- MESSAGE HANDLING -->
+    {% if message %}
+    <div class="message-box"
+      style="background-color: #e8f5e9; color: #2e7d32; padding: 15px; border-radius: 8px; margin-bottom: 20px; font-weight: 500;">
+      💡 {{ message }}
+    </div>
+    {% endif %}
 
-      <!-- RESULT CARDS -->
-      <div class="result-container">
-        {% for laptop in recommendations %}
-        <div class="result-card">
-          <!-- SIMILARITY BADGE (kanan atas) -->
-          {% if laptop.similarity %}
-          <div class="similarity-badge" title="Tingkat kemiripan dengan kriteria Anda">
-            ✨ {{ laptop.similarity }}
-          </div>
+    <!-- RESULT CARDS CONTAINER -->
+    <div class="result-container">
+      {% for laptop in recommendations %}
+      <div class="result-card">
+
+        <!-- SIMILARITY BADGE (Kanan Atas) -->
+        {% if laptop.similarity %}
+        <div class="similarity-badge" title="Tingkat kemiripan spesifikasi dengan kriteria Anda">
+          ✨ Score: {{ laptop.similarity }}
+        </div>
+        {% endif %}
+
+        <!-- NAMA LAPTOP -->
+        <h2>{{ laptop.product_name }}</h2>
+
+        <!-- SPESIFIKASI DETAIL -->
+        <div class="spec-list">
+          <p><strong>Processor:</strong> {{ laptop.processor }}</p>
+          <p><strong>RAM Sistem:</strong> {{ laptop.ram }} GB</p>
+          <p><strong>Kartu Grafis (GPU):</strong> {{ laptop.gpu }}</p>
+          <p><strong>Harga Pasar:</strong> {{ laptop.price }}</p>
+          <p><strong>Kategori Terpeta:</strong> <span class="category-tag">{{ laptop.kategori_3 }}</span></p>
+
+          {% if laptop.shop_name %}
+          <p><strong>Rekomendasi Toko:</strong> {{ laptop.shop_name }}</p>
           {% endif %}
 
-          <!-- NAMA LAPTOP -->
-          <h2>{{ laptop.product_name }}</h2>
-
-          <!-- SPESIFIKASI -->
-          <div class="spec-list">
-            <p><strong>Processor:</strong> {{ laptop.processor }}</p>
-            <p><strong>RAM:</strong> {{ laptop.ram }} GB</p>
-            <p><strong>GPU:</strong> {{ laptop.gpu }}</p>
-            <p><strong>Harga:</strong> {{ laptop.price }}</p>
-            <p><strong>Kategori:</strong> {{ laptop.kategori_kebutuhan }}</p>
-
-            {% if laptop.shop_name %}
-            <p><strong>Toko:</strong> {{ laptop.shop_name }}</p>
-            {% endif %}
-
-            <!-- JARAK (opsional) -->
-            {% if laptop.distance %}
-            <p><strong>Jarak Euclidean:</strong> {{ laptop.distance }}</p>
-            {% endif %}
-          </div>
-
-          <!-- BUTTON PRODUK -->
-          {% if laptop.product_url %}
-          <a href="{{ laptop.product_url }}" target="_blank" class="product-btn">
-            Lihat Produk
-          </a>
+          <!-- DETAIL JARAK GEOMETRIS -->
+          {% if laptop.distance %}
+          <p><small style="color: #757575;">Jarak Vektor: {{ laptop.distance }}</small></p>
           {% endif %}
         </div>
-        {% endfor %}
-      </div>
-    </section>
 
-    <!-- Footer -->
-    <footer>
-      <p>© 2026 CyberLap | Artificial Intelligence Project</p>
-    </footer>
-  </body>
+        <!-- BUTTON CTA PRODUK -->
+        {% if laptop.product_url %}
+        <a href="{{ laptop.product_url }}" target="_blank" class="product-btn"
+          style="display: inline-block; margin-top: 15px; text-decoration: none; text-align: center;">
+          Lihat Detail Produk
+        </a>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- BACK TO HOME BUTTON -->
+    <div style="text-align: center; margin-top: 30px;">
+      <a href="/" class="btn"
+        style="display: inline-block; padding: 12px 30px; background-color: #1976d2; color: white; text-decoration: none; border-radius: 8px; font-weight: 500;">
+        ← Kembali ke Beranda
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 CyberLap | Artificial Intelligence Project</p>
+  </footer>
+</body>
+
 </html>
