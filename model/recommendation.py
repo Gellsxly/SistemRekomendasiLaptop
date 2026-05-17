@@ -1,21 +1,24 @@
 import pickle
 import pandas as pd
+import numpy as np
 
 # =========================
-# LOAD MODEL
+# LOAD MODEL (dictionary)
 # =========================
 with open('model/knn_model.pkl', 'rb') as file:
-    knn = pickle.load(file)
+    model_data = pickle.load(file)
+
+knn = model_data['model']
+weights = model_data['weights']           # [1.0, 2.0, 1.5]
+best_params = model_data['best_params']
+model_accuracy = model_data['test_accuracy']
 
 # =========================
-# LOAD ENCODER
+# LOAD ENCODER & SCALER
 # =========================
 with open('model/label_encoder.pkl', 'rb') as file:
     label_encoder = pickle.load(file)
 
-# =========================
-# LOAD SCALER (PENTING!)
-# =========================
 with open('model/scaler.pkl', 'rb') as file:
     scaler = pickle.load(file)
 
@@ -30,6 +33,7 @@ df = pd.read_csv('dataset/cleaned_dataset.csv')
 def recommend_laptop(budget, kebutuhan, ram_user=None):
     """
     Rekomendasi laptop berdasarkan budget dan kebutuhan.
+    Urutan yang benar: weight → scale (sama seperti training)
     """
     # Validasi kategori
     if kebutuhan not in label_encoder.classes_:
@@ -48,34 +52,46 @@ def recommend_laptop(budget, kebutuhan, ram_user=None):
     # Encode kategori
     kategori_encoded = label_encoder.transform([kebutuhan])[0]
 
-    # Input user (fitur: budget, ram, kategori_encoded)
-    user_input = [[budget, ram, kategori_encoded]]
+    # Input user (fitur: price, ram, kategori_encoded)
+    user_input = np.array([[budget, ram, kategori_encoded]])
 
-    # NORMALISASI input user dengan scaler yang sama
-    user_input_scaled = scaler.transform(user_input)
+    # 1. Terapkan weighting (sama seperti training) – SEBELUM scaling
+    user_input_weighted = user_input * weights
 
-    # Cari tetangga terdekat (gunakan data yang sudah di-scale)
+    # 2. Normalisasi dengan scaler yang sudah dilatih pada weighted training data
+    user_input_scaled = scaler.transform(user_input_weighted)
+
+    # 3. Cari tetangga terdekat
     distances, indices = knn.kneighbors(user_input_scaled)
 
     # Ambil rekomendasi
     recommendations = df.iloc[indices[0]].copy()
 
-    # Filter duplikat: urutkan harga termurah, lalu RAM terbesar
+    # Tambahkan distance dan similarity
+    recommendations['distance'] = distances[0]
+    recommendations['similarity'] = 1 / (1 + distances[0])
+
+    # Filter duplikat: urutkan jarak → harga termurah
     recommendations = recommendations.sort_values(
-        ['price', 'ram'], ascending=[True, False]
+        ['distance', 'price'], ascending=[True, True]
     )
     recommendations = recommendations.drop_duplicates(
         subset=['product_name'], keep='first'
     )
-
-    # Ambil 5 laptop terbaik
     recommendations = recommendations.head(5)
 
     # Kolom output
-    output_cols = ['product_name', 'processor', 'ram', 'gpu', 'price', 'kategori_kebutuhan']
+    output_cols = ['product_name', 'processor', 'ram', 'gpu', 'price',
+                   'kategori_kebutuhan', 'distance', 'similarity']
     if 'product_url' in df.columns:
         output_cols.append('product_url')
     if 'shop_name' in df.columns:
         output_cols.append('shop_name')
 
     return recommendations[output_cols]
+
+# =========================
+# Ambil akurasi model (opsional)
+# =========================
+def get_model_accuracy():
+    return model_accuracy

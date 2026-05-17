@@ -27,10 +27,8 @@
     </nav>
 
     <!-- About Hero -->
-
     <section class="about-hero">
       <h1>About CyberLap</h1>
-
       <p>
         CyberLap merupakan sistem rekomendasi laptop berbasis Artificial
         Intelligence yang dirancang untuk membantu pengguna menemukan laptop
@@ -40,11 +38,9 @@
     </section>
 
     <!-- Main Content -->
-
     <section class="about-content">
       <div class="about-card">
         <h2>What is CyberLap?</h2>
-
         <p>
           CyberLap adalah platform rekomendasi laptop pintar yang memanfaatkan
           teknologi Artificial Intelligence untuk memberikan rekomendasi laptop
@@ -56,18 +52,46 @@
 
       <div class="about-card">
         <h2>How Does The AI Work?</h2>
-
         <p>
-          Sistem CyberLap menggunakan algoritma K-Nearest Neighbor (KNN), yaitu
-          metode Artificial Intelligence yang bekerja dengan mencari data laptop
-          yang memiliki kemiripan paling dekat dengan kebutuhan pengguna
-          berdasarkan parameter seperti budget dan jenis penggunaan.
+          Sistem CyberLap menggunakan algoritma <strong>K-Nearest Neighbor (KNN)</strong>, yaitu
+          metode pembelajaran mesin yang bekerja dengan mencari <strong>k data laptop</strong>
+          yang paling mirip dengan kriteria yang dimasukkan pengguna.
+        </p>
+        <p>
+          KNN menghitung jarak Euclidean antara vektor fitur (budget, RAM, kategori kebutuhan)
+          dari input pengguna dengan semua laptop dalam database. Jarak terkecil menunjukkan
+          kemiripan tertinggi. Hasilnya adalah 5 laptop terdekat yang direkomendasikan.
+        </p>
+        <p>
+          Model kami dilatih dengan <strong>lebih dari 1000 data laptop</strong>
+          dari berbagai merek dan spesifikasi. Proses training menggunakan <strong>weighted
+          features</strong> (Price: 1, RAM: 2, Kategori: 1.5) untuk memberikan prioritas
+          pada RAM dan jenis penggunaan.
+        </p>
+      </div>
+
+      <div class="about-card">
+        <h2>Estimasi Budget per Kebutuhan</h2>
+        <p>
+          Berdasarkan data laptop yang tersedia, berikut perkiraan kisaran budget
+          yang umum untuk setiap kategori (harga dalam Rupiah):
+        </p>
+        <ul style="margin-top: 15px;">
+          <li><strong>🎮 Gaming</strong> : Rp 8.000.000 – Rp 25.000.000+</li>
+          <li><strong>💻 Coding</strong> : Rp 6.000.000 – Rp 15.000.000</li>
+          <li><strong>🎨 Editing</strong> : Rp 12.000.000 – Rp 30.000.000</li>
+          <li><strong>🖨️ Rendering</strong> : Rp 15.000.000 – Rp 40.000.000</li>
+          <li><strong>📁 Office</strong> : Rp 4.000.000 – Rp 8.000.000</li>
+        </ul>
+        <p style="margin-top: 10px; font-size: 13px;">
+          <em>Catatan: Angka ini adalah rentang umum berdasarkan median dan persentil
+          data yang ada. Budget yang lebih rendah mungkin tetap menghasilkan rekomendasi
+          namun dengan spesifikasi terbatas.</em>
         </p>
       </div>
 
       <div class="about-card">
         <h2>Why Use CyberLap?</h2>
-
         <p>
           Banyak pengguna kesulitan memilih laptop karena terlalu banyak pilihan
           di pasaran. CyberLap hadir untuk membantu proses pengambilan keputusan
@@ -78,7 +102,6 @@
 
       <div class="about-card">
         <h2>Main Features</h2>
-
         <ul>
           <li>Smart laptop recommendation</li>
           <li>Budget-based filtering</li>
@@ -90,9 +113,8 @@
     </section>
 
     <!-- Footer -->
-
     <footer>
-      <p>© 2026 CyberLap | Artificial Intelligence Project</p>
+      <p>© 2025 CyberLap | Artificial Intelligence Project</p>
     </footer>
   </body>
 </html>
