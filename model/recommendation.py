@@ -28,6 +28,20 @@ encoded_columns = best_model['encoded_columns']
 core_model = best_model['model']
 model_accuracy = best_model['accuracy']
 
+# Ambil category_mapping jika ada (untuk fallback)
+category_mapping = best_model.get('category_mapping', {
+    'Gaming': 'Gaming',
+    'Office': 'Office_Coding',
+    'Coding': 'Office_Coding',
+    'Editing': 'Editing_Rendering',
+    'Rendering': 'Editing_Rendering'
+})
+
+# Jika kolom 'kategori_3' tidak ada, buat dari 'kategori_kebutuhan' menggunakan mapping
+if 'kategori_3' not in df.columns:
+    df['kategori_3'] = df['kategori_kebutuhan'].map(category_mapping)
+    print("⚠️ Kolom 'kategori_3' tidak ditemukan, dibuat ulang dari mapping.")
+
 # Rekonstruksi database berfitur lengkap untuk perhitungan jarak di runtime
 df_encoded_db = pd.get_dummies(df, columns=['processor', 'gpu'], prefix=['proc', 'gpu'], dtype=int)
 
@@ -170,7 +184,30 @@ def recommend_laptop(budget, kebutuhan, ram_user=None):
     recommendations = recommendations.sort_values(['distance', 'price'], ascending=[True, True])
     recommendations = recommendations.head(5)
 
-    output_cols = ['product_name', 'processor', 'ram', 'gpu', 'price', 
+    # ✅ FIX: Map kategori_3 dengan mapping yang mencakup SEMUA kemungkinan nilai
+    full_category_mapping = {
+        # Nilai asli 5 kategori
+        'Gaming': 'Gaming',
+        'Office': 'Office_Coding',
+        'Coding': 'Office_Coding',
+        'Editing': 'Editing_Rendering',
+        'Rendering': 'Editing_Rendering',
+        # Nilai gabungan (sudah di-merge di preprocessing)
+        'Office_Coding': 'Office_Coding',
+        'Editing_Rendering': 'Editing_Rendering',
+    }
+
+    if 'kategori_3' not in recommendations.columns or recommendations['kategori_3'].isna().any():
+        recommendations['kategori_3'] = recommendations['kategori_kebutuhan'].map(full_category_mapping)
+
+    # Fallback: jika masih ada nan, isi dengan kebutuhan_mapped
+    recommendations['kategori_3'] = recommendations['kategori_3'].fillna(kebutuhan_mapped)
+
+    # PASTIKAN KOLOM kategori_3 ADA
+    if 'kategori_3' not in recommendations.columns:
+        recommendations['kategori_3'] = recommendations['kategori_kebutuhan'].map(category_mapping)
+
+    output_cols = ['product_name', 'processor', 'ram', 'gpu', 'price',
                    'kategori_3', 'distance', 'similarity']
     
     for extra_col in ['product_url', 'shop_name']:
@@ -179,6 +216,7 @@ def recommend_laptop(budget, kebutuhan, ram_user=None):
             
     existing_cols = [c for c in output_cols if c in recommendations.columns]
     return recommendations[existing_cols]
+
 
 def get_model_accuracy():
     return model_accuracy

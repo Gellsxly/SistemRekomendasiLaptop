@@ -8,7 +8,7 @@ from sklearn.preprocessing import LabelEncoder, StandardScaler
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 from utils.parser import extract_ram, extract_processor, extract_gpu
@@ -114,6 +114,8 @@ for metric in ['euclidean', 'manhattan']:
             best_knn_acc, best_knn_model, best_knn_params = acc, knn, {'n_neighbors': k, 'metric': metric}
 
 y_pred_knn = best_knn_model.predict(X_test_scaled)
+print("\n📊 Confusion Matrix - KNN Terbaik:")
+print(confusion_matrix(y_test, y_pred_knn))
 best_knn_metrics = evaluate_model(y_test, y_pred_knn, f"🎯 KNN Terbaik (k={best_knn_params['n_neighbors']})")
 
 # =====================================================
@@ -132,6 +134,8 @@ for n_est in [50, 100, 200]:
             best_rf_acc, best_rf_model, best_rf_params = acc, rf, {'n_estimators': n_est, 'max_depth': max_d}
 
 y_pred_rf = best_rf_model.predict(X_test_scaled)
+print("\n📊 Confusion Matrix - Random Forest Terbaik:")
+print(confusion_matrix(y_test, y_pred_rf))
 best_rf_metrics = evaluate_model(y_test, y_pred_rf, f"🎯 RF Terbaik (n_est={best_rf_params['n_estimators']})")
 
 # =====================================================
@@ -156,6 +160,8 @@ for metric in ['euclidean', 'manhattan']:
             best_wknn_acc, best_wknn_model, best_wknn_params = acc, wknn, {'n_neighbors': k, 'metric': metric}
 
 y_pred_wknn = best_wknn_model.predict(X_test_weighted)
+print("\n📊 Confusion Matrix - Weighted KNN Terbaik:")
+print(confusion_matrix(y_test, y_pred_wknn))
 best_wknn_metrics = evaluate_model(y_test, y_pred_wknn, f"🎯 Weighted KNN Terbaik")
 
 # =====================================================
@@ -164,7 +170,7 @@ best_wknn_metrics = evaluate_model(y_test, y_pred_wknn, f"🎯 Weighted KNN Terb
 comparison = {
     'KNN': {'accuracy': best_knn_acc, 'metrics': best_knn_metrics, 'model': best_knn_model, 'params': best_knn_params, 'type': 'knn'},
     'Random Forest': {'accuracy': best_rf_acc, 'metrics': best_rf_metrics, 'model': best_rf_model, 'params': best_rf_params, 'type': 'random_forest'},
-    'Weighted KNN': {'accuracy': best_wknn_acc, 'metrics': best_wknn_metrics, 'model': best_wknn_model, 'params': best_wknn_params, 'type': 'weighted_knn', 'weights': weights.tolist()} # 🎯 FIX: Ditranslasikan ke .tolist() agar aman di-pickle
+    'Weighted KNN': {'accuracy': best_wknn_acc, 'metrics': best_wknn_metrics, 'model': best_wknn_model, 'params': best_wknn_params, 'type': 'weighted_knn', 'weights': weights.tolist()}
 }
 
 sorted_models = sorted(comparison.items(), key=lambda x: x[1]['accuracy'], reverse=True)
@@ -181,7 +187,8 @@ best_model_data = {
     'encoded_columns': encoded_cols,
     'unique_processors': unique_processors,
     'unique_gpus': unique_gpus,
-    'accuracy': best_model_info['accuracy']
+    'accuracy': best_model_info['accuracy'],
+    'category_mapping': category_mapping
 }
 if 'weights' in best_model_info:
     best_model_data['weights'] = best_model_info['weights']
