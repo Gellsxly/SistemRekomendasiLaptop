@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>About | CyberLap</title>
+    <title>Tentang Sistem | CyberLap</title>
 
     <link
       rel="stylesheet"
@@ -21,14 +21,14 @@
       <div class="logo">CyberLap</div>
       <ul class="nav-links">
         <li><a href="/">Beranda</a></li>
-        <li><a href="/about">Tentang</a></li>
+        <li><a href="/about">Tentang Kami</a></li>
         <li><a href="/#recommendation">Rekomendasi</a></li>
       </ul>
     </nav>
 
     <!-- About Hero -->
     <section class="about-hero">
-      <h1>About CyberLap</h1>
+      <h1>Tentang CyberLap</h1>
       <p>
         CyberLap merupakan sistem rekomendasi laptop berbasis Artificial
         Intelligence yang dirancang untuk membantu pengguna menemukan laptop
@@ -40,7 +40,7 @@
     <!-- Main Content -->
     <section class="about-content">
       <div class="about-card">
-        <h2>What is CyberLap?</h2>
+        <h2>Apa Itu CyberLap?</h2>
         <p>
           CyberLap adalah platform rekomendasi laptop pintar yang memanfaatkan
           teknologi Artificial Intelligence untuk memberikan rekomendasi laptop
@@ -51,126 +51,220 @@
       </div>
 
       <div class="about-card">
-        <h2>How Does The AI Work?</h2>
+        <h2>Bagaimana AI Bekerja?</h2>
         <p>
-          Sistem CyberLap menggunakan <strong>ensemble 3 algoritma Machine Learning</strong> 
-          yang bekerja secara kolaboratif untuk memberikan rekomendasi paling akurat:
+          Sistem CyberLap menggunakan
+          <strong>ensemble 3 algoritma Machine Learning</strong>
+          yang bekerja secara kolaboratif untuk memberikan rekomendasi paling
+          akurat:
         </p>
 
-        <div style="margin-top: 15px; padding: 15px; background-color: #f0f4ff; border-radius: 8px; border-left: 4px solid #1976d2;">
-          <h4 style="margin-top: 0; color: #1976d2;">1️⃣ K-Nearest Neighbor (KNN)</h4>
+        <div
+          style="
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #f0f4ff;
+            border-radius: 8px;
+            border-left: 4px solid #1976d2;
+          "
+        >
+          <h4 style="margin-top: 0; color: #1976d2">
+            1️⃣ K-Nearest Neighbor (KNN)
+          </h4>
           <p>
-            KNN mencari <strong>k laptop terdekat</strong> dengan menghitung jarak Euclidean 
-            antara fitur input pengguna (budget, RAM, kategori kebutuhan) dengan semua laptop 
-            dalam database. Semakin kecil jarak, semakin mirip spesifikasinya.
+            KNN mencari <strong>k laptop terdekat</strong> dengan menghitung
+            jarak Euclidean antara fitur input pengguna (budget, RAM, kategori
+            kebutuhan) dengan semua laptop dalam database. Semakin kecil jarak,
+            semakin mirip spesifikasinya.
           </p>
-          <p><strong>Keunggulan:</strong> Sederhana, intuitif, dan cepat untuk dataset kecil hingga medium.</p>
+          <p>
+            <strong>Keunggulan:</strong> Sederhana, intuitif, dan cepat untuk
+            dataset kecil hingga medium.
+          </p>
         </div>
 
-        <div style="margin-top: 15px; padding: 15px; background-color: #f5f0ff; border-radius: 8px; border-left: 4px solid #7c3aed;">
-          <h4 style="margin-top: 0; color: #7c3aed;">2️⃣ Random Forest</h4>
+        <div
+          style="
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #f5f0ff;
+            border-radius: 8px;
+            border-left: 4px solid #7c3aed;
+          "
+        >
+          <h4 style="margin-top: 0; color: #7c3aed">2️⃣ Random Forest</h4>
           <p>
-            Random Forest menggunakan ensemble dari banyak decision trees yang bekerja paralel 
-            untuk membuat prediksi kategori kebutuhan. Setiap tree memberikan suara dan hasil 
-            akhir adalah keputusan mayoritas.
+            Random Forest menggunakan ensemble dari banyak decision trees yang
+            bekerja paralel untuk membuat prediksi kategori kebutuhan. Setiap
+            tree memberikan suara dan hasil akhir adalah keputusan mayoritas.
           </p>
-          <p><strong>Keunggulan:</strong> Menangani non-linear relationships dan feature interactions dengan baik.</p>
+          <p>
+            <strong>Keunggulan:</strong> Menangani non-linear relationships dan
+            feature interactions dengan baik.
+          </p>
         </div>
 
-        <div style="margin-top: 15px; padding: 15px; background-color: #fff5f0; border-radius: 8px; border-left: 4px solid #f97316;">
-          <h4 style="margin-top: 0; color: #f97316;">3️⃣ Weighted K-Nearest Neighbor (WKNN)</h4>
+        <div
+          style="
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #fff5f0;
+            border-radius: 8px;
+            border-left: 4px solid #f97316;
+          "
+        >
+          <h4 style="margin-top: 0; color: #f97316">
+            3️⃣ Weighted K-Nearest Neighbor (WKNN)
+          </h4>
           <p>
-            WKNN adalah peningkatan dari KNN yang memberikan <strong>bobot berbeda</strong> 
-            pada setiap fitur. Dalam sistem CyberLap: RAM diberi bobot 2.0, Price Tier 1.5, 
-            dan Kategori 1.0 untuk memprioritaskan spesifikasi hardware.
+            WKNN adalah peningkatan dari KNN yang memberikan
+            <strong>bobot berbeda</strong>
+            pada setiap fitur. Dalam sistem CyberLap: RAM diberi bobot 2.0,
+            Price Tier 1.5, dan Kategori 1.0 untuk memprioritaskan spesifikasi
+            hardware.
           </p>
-          <p><strong>Keunggulan:</strong> Lebih fleksibel dalam menangani fitur dengan kepentingan berbeda.</p>
+          <p>
+            <strong>Keunggulan:</strong> Lebih fleksibel dalam menangani fitur
+            dengan kepentingan berbeda.
+          </p>
         </div>
 
-        <p style="margin-top: 20px;">
+        <p style="margin-top: 20px">
           Model kami dilatih dengan <strong>lebih dari 1000 data laptop</strong>
-          dari berbagai merek dan spesifikasi yang dikategorikan ke dalam 3 kelompok utama:
-          <strong>Gaming</strong>, <strong>Office_Coding</strong>, dan <strong>Editing_Rendering</strong>.
+          dari berbagai merek dan spesifikasi yang dikategorikan ke dalam 3
+          kelompok utama:
+          <strong>Gaming</strong>, <strong>Office_Coding</strong>, dan
+          <strong>Editing_Rendering</strong>.
         </p>
 
         <p>
           {% if model_accuracy %}
-          <strong>✨ Tingkat Akurasi Model: {{ "{:.2%}".format(model_accuracy) }}</strong>
-          {% if model_type %}<br/>Algoritma Terbaik: <strong>{{ model_type }}</strong>{% endif %}
-          {% endif %}
+          <strong
+            >✨ Tingkat Akurasi Model: {{ "{:.2%}".format(model_accuracy)
+            }}</strong
+          >
+          {% if model_type %}<br />Algoritma Terbaik:
+          <strong>{{ model_type }}</strong>{% endif %} {% endif %}
         </p>
       </div>
 
       <div class="about-card">
-        <h2>Preprocessing & Feature Engineering</h2>
-        <p>
-          Sebelum training, data melalui proses preprocessing komprehensif:
-        </p>
-        <ul style="margin-top: 10px;">
-          <li><strong>Text Mining:</strong> Ekstraksi RAM, Processor, GPU dari nama produk</li>
-          <li><strong>Price Binning:</strong> Kategorisasi harga menjadi 4 tier (Entry, Mid, High, Flagship)</li>
-          <li><strong>One-Hot Encoding:</strong> Konversi kategori processor dan GPU ke format numerical</li>
-          <li><strong>Standardisasi:</strong> Normalisasi fitur menggunakan StandardScaler</li>
-          <li><strong>Kategori Mapping:</strong> Penyederhanaan 5 input kategori menjadi 3 kategori optimal</li>
+        <h2>Praproses & Rekayasa Fitur</h2>
+        <p>Sebelum training, data melalui proses preprocessing komprehensif:</p>
+        <ul style="margin-top: 10px">
+          <li>
+            <strong>Text Mining:</strong> Ekstraksi RAM, Processor, GPU dari
+            nama produk
+          </li>
+          <li>
+            <strong>Price Binning:</strong> Kategorisasi harga menjadi 4 tier
+            (Entry, Mid, High, Flagship)
+          </li>
+          <li>
+            <strong>One-Hot Encoding:</strong> Konversi kategori processor dan
+            GPU ke format numerical
+          </li>
+          <li>
+            <strong>Standardisasi:</strong> Normalisasi fitur menggunakan
+            StandardScaler
+          </li>
+          <li>
+            <strong>Kategori Mapping:</strong> Penyederhanaan 5 input kategori
+            menjadi 3 kategori optimal
+          </li>
         </ul>
       </div>
 
       <div class="about-card">
         <h2>Estimasi Budget per Kebutuhan</h2>
         <p>
-          Berdasarkan data laptop yang tersedia, berikut perkiraan kisaran budget
-          yang umum untuk setiap kategori (harga dalam Rupiah):
+          Berdasarkan data laptop yang tersedia, berikut perkiraan kisaran
+          budget yang umum untuk setiap kategori (harga dalam Rupiah):
         </p>
-        <ul style="margin-top: 15px;">
+        <ul style="margin-top: 15px">
           <li><strong>🎮 Gaming</strong> : Rp 8.000.000 – Rp 25.000.000+</li>
-          <li><strong>💻 Coding & Office</strong> : Rp 6.000.000 – Rp 15.000.000</li>
-          <li><strong>🎨 Editing & Design</strong> : Rp 12.000.000 – Rp 30.000.000</li>
-          <li><strong>🖨️ Rendering & Video Production</strong> : Rp 15.000.000 – Rp 40.000.000</li>
-          <li><strong>📁 Office & Admin</strong> : Rp 4.000.000 – Rp 8.000.000</li>
+          <li>
+            <strong>💻 Coding & Office</strong> : Rp 6.000.000 – Rp 15.000.000
+          </li>
+          <li>
+            <strong>🎨 Editing & Design</strong> : Rp 12.000.000 – Rp 30.000.000
+          </li>
+          <li>
+            <strong>🖨️ Rendering & Video Production</strong> : Rp 15.000.000 –
+            Rp 40.000.000
+          </li>
+          <li>
+            <strong>📁 Office & Admin</strong> : Rp 4.000.000 – Rp 8.000.000
+          </li>
         </ul>
-        <p style="margin-top: 10px; font-size: 13px;">
-          <em>Catatan: Angka ini adalah rentang umum berdasarkan median dan persentil
-          data yang ada. Budget yang lebih rendah mungkin tetap menghasilkan rekomendasi
-          namun dengan spesifikasi terbatas. Sistem memberikan toleransi budget hingga 15% 
-          untuk fleksibilitas pemilihan.</em>
+        <p style="margin-top: 10px; font-size: 13px">
+          <em
+            >Catatan: Angka ini adalah rentang umum berdasarkan median dan
+            persentil data yang ada. Budget yang lebih rendah mungkin tetap
+            menghasilkan rekomendasi namun dengan spesifikasi terbatas. Sistem
+            memberikan toleransi budget hingga 15% untuk fleksibilitas
+            pemilihan.</em
+          >
         </p>
       </div>
 
       <div class="about-card">
-        <h2>Why Use CyberLap?</h2>
-        <ul style="line-height: 1.8;">
-          <li>✅ <strong>AI-Powered Recommendations:</strong> Menggunakan 3 algoritma ML terdepan</li>
-          <li>✅ <strong>Akurasi Tinggi:</strong> Tingkat akurasi yang tervalidasi di atas 80%</li>
-          <li>✅ <strong>Cepat & Efisien:</strong> Hasil rekomendasi instant dalam hitungan detik</li>
-          <li>✅ <strong>Budget-Aware:</strong> Filtering berdasarkan kemampuan finansial pengguna</li>
-          <li>✅ <strong>Data-Driven:</strong> Didasarkan pada analisis lebih dari 1000 laptop riil</li>
-          <li>✅ <strong>User-Friendly:</strong> Interface modern dan mudah digunakan</li>
+        <h2>Kenapa Menggunakan CyberLap?</h2>
+        <ul style="line-height: 1.8">
+          <li>
+            ✅ <strong>AI-Powered Recommendations:</strong> Menggunakan 3
+            algoritma ML terdepan
+          </li>
+          <li>
+            ✅ <strong>Akurasi Tinggi:</strong> Tingkat akurasi yang tervalidasi
+            di atas 80%
+          </li>
+          <li>
+            ✅ <strong>Cepat & Efisien:</strong> Hasil rekomendasi instant dalam
+            hitungan detik
+          </li>
+          <li>
+            ✅ <strong>Budget-Aware:</strong> Filtering berdasarkan kemampuan
+            finansial pengguna
+          </li>
+          <li>
+            ✅ <strong>Data-Driven:</strong> Didasarkan pada analisis lebih dari
+            1000 laptop riil
+          </li>
+          <li>
+            ✅ <strong>User-Friendly:</strong> Interface modern dan mudah
+            digunakan
+          </li>
         </ul>
       </div>
 
       <div class="about-card">
-        <h2>Main Features</h2>
+        <h2>Fitur Utama</h2>
         <ul>
           <li>🤖 Smart recommendation menggunakan 3 algoritma ML</li>
           <li>💰 Budget-based filtering dengan toleransi 15%</li>
           <li>📊 Data dari lebih 1000 laptop di pasaran</li>
-          <li>🎯 Kategori kebutuhan yang fleksibel (5 input → 3 kategori optimal)</li>
-          <li>⚙️ Advanced feature engineering (One-Hot Encoding, Price Binning)</li>
+          <li>
+            🎯 Kategori kebutuhan yang fleksibel (5 input → 3 kategori optimal)
+          </li>
+          <li>
+            ⚙️ Advanced feature engineering (One-Hot Encoding, Price Binning)
+          </li>
           <li>🎨 Modern cyberpunk interface dengan responsive design</li>
           <li>📱 Mobile-friendly untuk akses dari berbagai perangkat</li>
         </ul>
       </div>
 
       <div class="about-card">
-        <h2>Model Comparison</h2>
+        <h2>Perbandingan Model</h2>
         <p>
           Ketiga algoritma di-train dan dievaluasi menggunakan metrik:
           <strong>Accuracy, Precision, Recall, dan F1-Score</strong>.
         </p>
         <p>
-          Algoritma dengan performa terbaik dipilih sebagai model production dan digunakan 
-          untuk memberikan rekomendasi kepada pengguna. Model ini disimpan dan di-load 
-          setiap kali sistem menerima request rekomendasi.
+          Algoritma dengan performa terbaik dipilih sebagai model production dan
+          digunakan untuk memberikan rekomendasi kepada pengguna. Model ini
+          disimpan dan di-load setiap kali sistem menerima request rekomendasi.
         </p>
       </div>
     </section>
